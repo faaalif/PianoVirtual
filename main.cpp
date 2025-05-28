@@ -20,7 +20,7 @@ void detectarYReproducir(Mat& mask, Rect zona, LPCWSTR sonido, Scalar colorActiv
         int area = countNonZero(roi);
 
         if (area > AREA_THRESHOLD) {
-            PlaySound(sonido, NULL, SND_FILENAME | SND_ASYNC);
+            PlaySound(sonido, NULL, SND_FILENAME | SND_ASYNC | SND_NOSTOP);
             rectangle(frame, zona, colorActiva, FILLED);
         }
         else {
@@ -44,7 +44,7 @@ int main() {
         Rect(110, 100, 80, 200),  // Azul - RE
         Rect(200, 100, 80, 200),  // Verde - MI
         Rect(290, 100, 80, 200),  // Amarillo - FA
-        Rect(380, 100, 80, 200),  // Naranja - SOL
+        Rect(380, 100, 80, 200),  // Azul claro - SOL
         Rect(470, 100, 80, 200),  // Rosa - LA
         Rect(560, 100, 80, 200)   // Morado - SI
     };
@@ -57,7 +57,7 @@ int main() {
         flip(frame, frame, 1);
         cvtColor(frame, hsv, COLOR_BGR2HSV);
 
-        Mat rojo1, rojo2, maskRojo, maskAzul, maskVerde, maskAmarillo, maskNaranja, maskRosa, maskMorado;
+        Mat rojo1, rojo2, maskRojo, maskAzul, maskVerde, maskAmarillo, maskAzulClaro, maskRosa, maskMorado;
 
         inRange(hsv, Scalar(0, 120, 70), Scalar(10, 255, 255), rojo1);
         inRange(hsv, Scalar(170, 120, 70), Scalar(180, 255, 255), rojo2);
@@ -66,18 +66,18 @@ int main() {
         inRange(hsv, Scalar(100, 150, 0), Scalar(140, 255, 255), maskAzul);
         inRange(hsv, Scalar(40, 70, 70), Scalar(80, 255, 255), maskVerde);
         inRange(hsv, Scalar(20, 100, 100), Scalar(30, 255, 255), maskAmarillo);
-        inRange(hsv, Scalar(10, 100, 100), Scalar(20, 255, 255), maskNaranja);
+        inRange(hsv, Scalar(85, 100, 100), Scalar(100, 255, 255), maskAzulClaro); 
         inRange(hsv, Scalar(140, 100, 100), Scalar(160, 255, 255), maskRosa);
         inRange(hsv, Scalar(125, 50, 50), Scalar(145, 255, 255), maskMorado);
 
         // rutas para el sonido
-        detectarYReproducir(maskRojo, teclas[0], L"do.wav", Scalar(0, 0, 255), frame);
-        detectarYReproducir(maskAzul, teclas[1], L"re.wav", Scalar(255, 0, 0), frame);
-        detectarYReproducir(maskVerde, teclas[2], L"mi.wav", Scalar(0, 255, 0), frame);
-        detectarYReproducir(maskAmarillo, teclas[3], L"fa.wav", Scalar(0, 255, 255), frame);
-        detectarYReproducir(maskNaranja, teclas[4], L"sol.wav", Scalar(0, 128, 255), frame);
-        detectarYReproducir(maskRosa, teclas[5], L"la.wav", Scalar(255, 0, 255), frame);
-        detectarYReproducir(maskMorado, teclas[6], L"si.wav", Scalar(128, 0, 128), frame);
+        detectarYReproducir(maskRojo, teclas[0], L"do.wav", Scalar(0, 0, 255), frame);           // Rojo
+        detectarYReproducir(maskAzul, teclas[1], L"re.wav", Scalar(255, 0, 0), frame);           // Azul
+        detectarYReproducir(maskVerde, teclas[2], L"mi.wav", Scalar(0, 255, 0), frame);          // Verde
+        detectarYReproducir(maskAmarillo, teclas[3], L"fa.wav", Scalar(0, 255, 255), frame);     // Amarillo
+        detectarYReproducir(maskAzulClaro, teclas[4], L"sol.wav", Scalar(255, 255, 0), frame);   // Azul claro
+        detectarYReproducir(maskRosa, teclas[5], L"la.wav", Scalar(255, 0, 255), frame);         // Rosa
+        detectarYReproducir(maskMorado, teclas[6], L"si.wav", Scalar(128, 0, 128), frame);       // Morado
 
         vector<string> notas = { "Do", "Re", "Mi", "Fa", "Sol", "La", "Si" };
         for (int i = 0; i < teclas.size(); ++i) {
