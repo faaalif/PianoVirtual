@@ -17,7 +17,7 @@ Notes and Colors
 | Blue    | Re   | `re.wav`   |
 | Green   | Mi   | `mi.wav`   |
 | Yellow  | Fa   | `fa.wav`   |
-| Orange  | Sol  | `sol.wav`  |
+| Light blue  | Sol  | `sol.wav`  |
 | Pink    | La   | `la.wav`   |
 | Purple  | Si   | `si.wav`   |
 
