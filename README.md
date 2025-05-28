@@ -63,13 +63,13 @@ When the program runs, it shows a virtual piano. Move a colored object into the 
 
 Requirements
 
-*Windows OS
+-Windows OS
 
-*OpenCV installed
+-OpenCV installed
 
-*Webcam
+-Webcam
 
-*C++ compiler (MSVC or MinGW)
+-C++ compiler (MSVC or MinGW)
 
 
 License
